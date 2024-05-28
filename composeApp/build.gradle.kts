@@ -37,7 +37,7 @@ kotlin {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.koin.android)
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
+            implementation(libs.kotlinx.coroutines.android)
         }
 
         commonMain.dependencies {
@@ -49,13 +49,13 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(projects.shared)
             implementation(libs.koin.core)
-            implementation("org.jetbrains.androidx.navigation:navigation-compose:2.7.0-alpha07")
-            implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:2.8.0")
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+            implementation(libs.navigation.compose)
+            implementation(libs.lifecycle.viewmodel.compose)
+            implementation(libs.kotlinx.coroutines.core)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.8.1")
+            implementation(libs.kotlinx.coroutines.swing)
         }
     }
 }
