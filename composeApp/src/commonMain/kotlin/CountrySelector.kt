@@ -1,4 +1,5 @@
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -64,7 +65,9 @@ internal fun CountrySelector(item: Country) {
         Modifier.background(
             color = MaterialTheme.colors.surface,
             shape = RoundedCornerShape(2.dp)
-        ).padding(8.dp)
+        )
+            .clickable { }
+            .padding(8.dp)
     ) {
         Text(
             text = item.id.uppercase(),
