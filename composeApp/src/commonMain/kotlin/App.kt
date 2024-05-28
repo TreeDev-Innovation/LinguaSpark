@@ -1,9 +1,3 @@
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -11,6 +5,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -22,15 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.NavController
-import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import org.jetbrains.compose.resources.painterResource
 
-import linguaspark.composeapp.generated.resources.Res
-import linguaspark.composeapp.generated.resources.compose_multiplatform
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -51,6 +40,15 @@ fun App() {
             }
             BottomNavigation {
                 var selected by remember { mutableStateOf(0) }
+                BottomNavigationItem(
+                    icon = { Icon(Icons.Filled.Place, contentDescription = "language selector") },
+                    label = { Text("Language") },
+                    selected = selected == 0,
+                    onClick = {
+                        navController.navigate(NavigationDestinations.LANGUAGE_SELECTOR.route)
+                        selected = 0
+                    }
+                )
                 BottomNavigationItem(
                     icon = { Icon(Icons.Filled.Home, contentDescription = "Home") },
                     label = { Text("Home") },
@@ -98,8 +96,11 @@ fun App() {
 fun MainApp(
     navController: NavHostController = rememberNavController()
 ) {
-    NavHost(navController = navController, startDestination = "home") {
-        composable(NavigationDestinations.CountrySelector.name) {
+    NavHost(
+        navController = navController,
+        startDestination = NavigationDestinations.LANGUAGE_SELECTOR.name
+    ) {
+        composable(NavigationDestinations.LANGUAGE_SELECTOR.name) {
             CountrySelector()
         }
         composable(NavigationDestinations.HOME.route) {
@@ -159,7 +160,7 @@ fun AboutScreen(navController: NavController) {
 }
 
 enum class NavigationDestinations(val route: String) {
-    CountrySelector("CountrySelector"),
+    LANGUAGE_SELECTOR("language_selector"),
     HOME("home"),
     PROFILE("profile"),
     SETTINGS("settings"),
