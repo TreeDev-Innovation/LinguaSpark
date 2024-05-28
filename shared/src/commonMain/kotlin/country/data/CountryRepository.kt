@@ -1,23 +1,16 @@
 package country.data
 
-import country.countryNames
+import country.domain.model.Country
 
-class CountryRepository {
-    suspend fun getCountriesWithNames(): List<Country> {
-        return countryNames.map {
+class CountryRepository(private val languageDataSource: LanguageDataSource) {
+    suspend fun getLanguagesList(): List<Country> {
+        return languageDataSource.getListOfLanguages().map {
             Country(
                 id = it.key,
-                name = it.value,
-                ""
+                name = it.value.name,
+                nativeName = it.value.nativeName
             )
         }
     }
 
 }
-
-
-data class Country(
-    val id: String,
-    val name: String,
-    val icon: String,
-)

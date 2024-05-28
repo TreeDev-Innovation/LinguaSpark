@@ -1,8 +1,17 @@
+@file:OptIn(ExperimentalSerializationApi::class)
+
 package country.data
 
-typealias CountryCode = String
+import country.data.model.LanguageDto
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
 
-private const val EMOJI_UNICODE = 0x1F1A5
+class LanguageDataSource() {
+    fun getListOfLanguages(): Map<String, LanguageDto> {
+        return Json.decodeFromString<Map<String, LanguageDto>>(languages)
+    }
+}
+
 
 val languages = """{
     "ab":{

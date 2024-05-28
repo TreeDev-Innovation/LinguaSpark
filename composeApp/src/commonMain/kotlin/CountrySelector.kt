@@ -3,9 +3,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,16 +18,14 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment.Companion.Center
-import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.HorizontalAlignmentLine
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
-import country.data.Country
 import country.data.CountryRepository
+import country.domain.model.Country
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -64,20 +66,40 @@ internal fun CountrySelector(item: Country) {
             shape = RoundedCornerShape(2.dp)
         ).padding(8.dp)
     ) {
-        Text(text = item.name)
+        Text(
+            text = item.id.uppercase(),
+            style = MaterialTheme.typography.h6
+        )
+
+        Box(
+            Modifier
+                .padding(horizontal = 8.dp)
+                .background(color = MaterialTheme.colors.onBackground.copy(alpha = 0.1f))
+                .width(1.dp)
+                .height(24.dp)
+        )
+
+        Text(
+            modifier = Modifier.weight(1f),
+            text = item.name, style = MaterialTheme.typography.body1
+        )
+        Spacer(Modifier.width(8.dp))
+        Text(
+            modifier = Modifier.weight(1f),
+            text = item.nativeName, style = MaterialTheme.typography.body2
+        )
     }
 }
 
 internal class CountrySelectorViewModel(
     private val countryRepository: CountryRepository
 ) : ViewModel() {
-
     private val _uiState: MutableStateFlow<List<Country>> = MutableStateFlow(emptyList())
     val uiState: StateFlow<List<Country>> = _uiState.asStateFlow()
 
     init {
         viewModelScope.launch {
-            _uiState.emit(countryRepository.getCountriesWithNames())
+            _uiState.emit(countryRepository.getLanguagesList())
         }
     }
 

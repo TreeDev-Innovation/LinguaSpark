@@ -1,6 +1,7 @@
 package di
 
 import country.data.CountryRepository
+import country.data.LanguageDataSource
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 import org.koin.dsl.KoinAppDeclaration
@@ -13,5 +14,6 @@ fun startDI() {
 }
 
 val appModule: Module = module {
-    single { CountryRepository() }
+    single { LanguageDataSource() }
+    single { CountryRepository(get()) }
 }
