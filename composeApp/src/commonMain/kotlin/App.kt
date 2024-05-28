@@ -16,6 +16,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import org.jetbrains.compose.resources.painterResource
 
 import linguaspark.composeapp.generated.resources.Res
@@ -26,26 +30,38 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Preview
 fun App() {
     MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
-        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-            Button(onClick = { showContent = !showContent }) {
-                Text("Click me!")
-            }
+        MainApp()
+    }
+}
 
-            AnimatedVisibility(
-                visible = showContent,
-                enter = fadeIn() + slideInHorizontally(),
-                exit = fadeOut() + slideOutHorizontally()
-            ) {
-                val greeting = remember { Greeting().greet() }
-                Column(
-                    Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
-                }
-            }
+@Composable
+fun MainApp(
+    navController: NavHostController = rememberNavController()
+) {
+    NavHost(
+        navController = navController,
+        startDestination = MainAppNavigation.CountrySelector.name
+    ) {
+        composable(MainAppNavigation.CountrySelector.name) {
+            CountrySelector()
+        }
+        composable(MainAppNavigation.Home.name) {
+            HomeScreen(navController)
+        }
+        composable(MainAppNavigation.Login.name) {
+            LoginScreen(navController)
         }
     }
+}
+
+enum class MainAppNavigation { CountrySelector, Home, Login }
+
+@Composable
+fun HomeScreen(navController: NavHostController) {
+
+}
+
+@Composable
+fun LoginScreen(navController: NavHostController) {
+
 }
