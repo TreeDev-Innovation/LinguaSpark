@@ -1,3 +1,5 @@
+# LinguaSpark
+
 This is a Kotlin Multiplatform project targeting Android, iOS, Desktop, Server.
 
 * `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
@@ -16,4 +18,4 @@ This is a Kotlin Multiplatform project targeting Android, iOS, Desktop, Server.
   The most important subfolder is `commonMain`. If preferred, you can add code to the platform-specific folders here too.
 
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…# LinguaSpark
+Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)
