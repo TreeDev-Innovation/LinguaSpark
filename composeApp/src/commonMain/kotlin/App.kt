@@ -19,6 +19,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import onboarding.nativelanguage.ChooseLanguagesScreen
 
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -28,68 +29,70 @@ fun App() {
     val navController = rememberNavController()
 
     MaterialTheme {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Box(
-                modifier = Modifier.fillMaxWidth().weight(1f),
-                contentAlignment = Alignment.Center
-            ) {
-                MainApp(navController = navController)
-            }
-            BottomNavigation {
-                var selected by remember { mutableStateOf(0) }
-                BottomNavigationItem(
-                    icon = { Icon(Icons.Filled.Place, contentDescription = "language selector") },
-                    label = { Text("Language") },
-                    selected = selected == 0,
-                    onClick = {
-                        navController.navigate(NavigationDestinations.LANGUAGE_SELECTOR.route)
-                        selected = 0
-                    }
-                )
-                BottomNavigationItem(
-                    icon = { Icon(Icons.Filled.Home, contentDescription = "Home") },
-                    label = { Text("Home") },
-                    selected = selected == 0,
-                    onClick = {
-                        navController.navigate(NavigationDestinations.HOME.route)
-                        selected = 0
-                    }
-                )
-                BottomNavigationItem(
-                    icon = { Icon(Icons.Filled.Person, contentDescription = "Profile") },
-                    label = { Text("Profile") },
-                    selected = selected == 1,
-                    onClick = {
-                        navController.navigate(NavigationDestinations.PROFILE.route)
-                        selected = 1
-                    }
-                )
-                BottomNavigationItem(
-                    icon = { Icon(Icons.Filled.Settings, contentDescription = "Settings") },
-                    label = { Text("Settings") },
-                    selected = selected == 2,
-                    onClick = {
-                        navController.navigate(NavigationDestinations.SETTINGS.route)
-                        selected = 2
-                    }
-                )
-                BottomNavigationItem(
-                    modifier = Modifier.background(MaterialTheme.colors.secondary),
-                    icon = { Icon(Icons.Filled.Info, contentDescription = "About") },
-                    label = { Text("About") },
-                    selected = selected == 3,
-                    onClick = {
-                        navController.navigate(NavigationDestinations.ABOUT.route)
-                        selected = 3
-                    }
-                )
-            }
-
-        }
+        ChooseLanguagesScreen()
     }
+//        Column(
+//            modifier = Modifier.fillMaxWidth(),
+//            horizontalAlignment = Alignment.CenterHorizontally
+//        ) {
+//            Box(
+//                modifier = Modifier.fillMaxWidth().weight(1f),
+//                contentAlignment = Alignment.Center
+//            ) {
+//                MainApp(navController = navController)
+//            }
+//            BottomNavigation {
+//                var selected by remember { mutableStateOf(0) }
+//                BottomNavigationItem(
+//                    icon = { Icon(Icons.Filled.Place, contentDescription = "language selector") },
+//                    label = { Text("Language") },
+//                    selected = selected == 0,
+//                    onClick = {
+//                        navController.navigate(NavigationDestinations.LANGUAGE_SELECTOR.route)
+//                        selected = 0
+//                    }
+//                )
+//                BottomNavigationItem(
+//                    icon = { Icon(Icons.Filled.Home, contentDescription = "Home") },
+//                    label = { Text("Home") },
+//                    selected = selected == 0,
+//                    onClick = {
+//                        navController.navigate(NavigationDestinations.HOME.route)
+//                        selected = 0
+//                    }
+//                )
+//                BottomNavigationItem(
+//                    icon = { Icon(Icons.Filled.Person, contentDescription = "Profile") },
+//                    label = { Text("Profile") },
+//                    selected = selected == 1,
+//                    onClick = {
+//                        navController.navigate(NavigationDestinations.PROFILE.route)
+//                        selected = 1
+//                    }
+//                )
+//                BottomNavigationItem(
+//                    icon = { Icon(Icons.Filled.Settings, contentDescription = "Settings") },
+//                    label = { Text("Settings") },
+//                    selected = selected == 2,
+//                    onClick = {
+//                        navController.navigate(NavigationDestinations.SETTINGS.route)
+//                        selected = 2
+//                    }
+//                )
+//                BottomNavigationItem(
+//                    modifier = Modifier.background(MaterialTheme.colors.secondary),
+//                    icon = { Icon(Icons.Filled.Info, contentDescription = "About") },
+//                    label = { Text("About") },
+//                    selected = selected == 3,
+//                    onClick = {
+//                        navController.navigate(NavigationDestinations.ABOUT.route)
+//                        selected = 3
+//                    }
+//                )
+//            }
+//
+//        }
+//    }
 }
 
 @Composable

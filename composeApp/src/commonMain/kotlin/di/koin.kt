@@ -9,11 +9,13 @@ import org.koin.dsl.module
 
 fun startDI() {
     startKoin {
-        modules(appModule)
+        modules(appModule, dataSourceModule)
     }
 }
 
 val appModule: Module = module {
-    single { LanguageDataSource() }
     single { CountryRepository(get()) }
+}
+val dataSourceModule = module {
+    single { LanguageDataSource() }
 }
